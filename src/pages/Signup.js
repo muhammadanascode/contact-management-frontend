@@ -4,8 +4,7 @@ import AuthForm from "../components/AuthForm";
 function Signup() {
   return (
     <div>
-      <h2>Signup</h2>
-      <AuthForm type="signup" />
+      <AuthForm type="Signup" />
     </div>
   );
 }
