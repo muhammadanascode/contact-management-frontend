@@ -30,6 +30,9 @@ function AuthForm({ type }) {
                         "Get Your self register here"}
                 </p>
 
+            </div>
+
+            <div className="flex flex-col">
                 <label className="mb-1 text-gray-700 font-medium">Email:</label>
                 <input
                     type="email"
