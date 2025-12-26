@@ -19,35 +19,45 @@ function AuthForm({ type }) {
     return (
 
         // Card container: reusable for any auth form; uses Tailwind for styling and responsiveness
-        <div className="w-full max-w-md p-6 sm:p-8 rounded-xl
-                        bg-purple-50/70 backdrop-blur-md border border-purple-100/40
-                        shadow-lg shadow-purple-200/40">
+        <div
+            className="
+             w-full
+             max-w-md
+             min-h-[80vh] sm:min-h-0
+             p-6 sm:p-8
+             rounded-xl
+             bg-purple-50/70 backdrop-blur-md
+             border border-purple-100/40
+             shadow-lg shadow-black-400
+             mx-auto
+            flex flex-col justify-start">
+
             <form
                 onSubmit={handleSubmit}
-                className={`flex flex-col ${type !== "Login" ? "gap-2" : "gap-3"}`}
+                className={`flex flex-col ${type !== "Login" ? "gap-1" : "gap-3"}`}
             >
                 {/* Top section: logo, heading, description */}
                 <div className="flex flex-col">
 
                     {/* Logo */}
                     <img
-                        src="/social-media.png"
+                        src="/management.png"
                         alt="Social media"
-                        className="w-24 h-24 mx-auto mb-2"
+                        className="w-24 h-24 mx-auto mb-1"
                     />
 
                     {/* Dynamic heading based on form type */}
-                    <h1 className="text-center text-2xl font-bold text-gray-800">
+                    <h1 className="text-center text-2xl font-bold text-purple-800">
                         {type === "Login" ?
                             "Welcome back" :
-                            "Register Yourself"}
+                            "Sign Up for Free"}
                     </h1>
 
                     {/* Dynamic subtext based on form type */}
-                    <p className="text-center text-sm text-gray-500 mt-1 mb-2">
+                    <p className="text-center text-sm text-gray-500 mt-1 mb-1">
                         {type === "Login" ?
                             "Sign in to continue to your account" :
-                            "Get Your self register here"}
+                            "Sign up to start managing your contacts effortlessly."}
                     </p>
 
                 </div>
