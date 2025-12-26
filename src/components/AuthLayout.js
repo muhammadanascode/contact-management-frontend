@@ -2,7 +2,7 @@ function AuthLayout({ children }) {
     return (
         <div className="min-h-screen flex flex-col md:flex-row">
             {/* Landing Section (Purple) */}
-            <div className="md:w-1/2 min-h-[40vh] md:h-screen 
+            <div className="md:w-2/5 min-h-[40vh] md:h-screen 
                       bg-purple-600 text-white
                       flex items-center justify-center p-8">
                 <div className="max-w-md flex flex-col items-center justify-center text-center space-y-6">
@@ -15,7 +15,7 @@ function AuthLayout({ children }) {
             </div>
 
             {/* Auth Section (White) */}
-            <div className="md:w-1/2 min-h-[60vh] md:h-screen 
+            <div className="md:w-3/5 min-h-[60vh] md:h-screen 
                       flex items-center justify-center
                       bg-gray-100 p-6 md:p-10">
                 {children}
