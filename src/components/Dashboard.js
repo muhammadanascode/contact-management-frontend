@@ -10,14 +10,17 @@ const Dashboard = () => {
 
             <main className="max-w-6xl mx-auto p-6">
                 {/* Search + Action Row */}
-                <div className="flex flex-col sm:flex-row gap-4 mb-6">
-                    <SearchBar />
+                <div className="flex flex-col sm:flex-row gap-4 mb-3 items-center">
+                    <div className="flex-1 w-full">
+                        <SearchBar />
+                    </div>
 
                     <Button
                         text="+ Add Contact"
-                        className="w-full sm:w-auto px-6"
+                        className="w-full sm:w-auto px-6 py-2 shrink-0"
                     />
                 </div>
+
 
                 <ContactList />
             </main>
