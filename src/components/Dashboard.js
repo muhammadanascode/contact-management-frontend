@@ -1,3 +1,4 @@
+import ContactList from "./ContactList";
 import Navbar from "./Navbar";
 import SearchBar from "./SearchBar";
 
@@ -8,6 +9,7 @@ const Dashboard = () => {
 
             <main className="max-w-6xl mx-auto p-6">
                 <SearchBar />
+                <ContactList />
             </main>
         </div>
     );
