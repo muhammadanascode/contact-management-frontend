@@ -3,15 +3,23 @@ import { NavLink } from "react-router-dom";
 const Navbar = () => {
     const linkClass = ({ isActive }) =>
         isActive
-            ? "text-blue-600 font-medium"
-            : "text-gray-600 hover:text-blue-600";
+            ? "text-purple-600 font-medium"
+            : "text-gray-600 hover:text-purple-600";
 
     return (
         <nav className="bg-white shadow-sm px-6 py-4 flex justify-between items-center">
             {/* Logo / App Name */}
-            <h1 className="text-xl font-bold text-gray-800">
-                ConnectHub CMS
-            </h1>
+            <div className="flex items-center gap-6 ">
+                <img
+                    src="social-media.png"
+                    className="h-8 w-8 sm:h-10 sm:w-10 object-contain"
+                    alt="Logo"
+
+                />
+                <h1 className="text-xl font-bold text-gray-800">
+                    ConnectHub CMS
+                </h1>
+            </div>
 
             {/* Navigation Links */}
             <div className="flex items-center gap-6">
