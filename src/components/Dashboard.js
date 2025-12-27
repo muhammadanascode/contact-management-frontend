@@ -10,7 +10,7 @@ const Dashboard = () => {
 
       <main className="max-w-6xl mx-auto p-6">
         {/* Search + Action Row */}
-        <div className="flex flex-col sm:flex-row gap-4 items-stretch sm:items-center mb-6">
+        <div className="flex flex-col sm:flex-row gap-4 mb-6">
           <SearchBar />
 
           <Button
