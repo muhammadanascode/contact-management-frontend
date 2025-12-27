@@ -1,4 +1,4 @@
-function Button({ type="button", text , className }) {
+function Button({ type="button", text , className, onClick }) {
     return (
         <>
             <button
@@ -7,6 +7,7 @@ function Button({ type="button", text , className }) {
              font-medium hover:bg-purple-800
              focus:outline-none focus:ring-2 focus:ring-blue-500
              transition` + className}
+             onClick={onClick}
             >{text}</button>
         </>
     )
