@@ -2,6 +2,7 @@ import Login from "../pages/Login";
 import Signup from "../pages/Signup";
 import AuthLayout from "../components/AuthLayout";
 import { Route, Routes, useLocation } from "react-router-dom";
+import Home from "../pages/Home";
 
 
 function AppContent() {
@@ -22,7 +23,7 @@ function AppContent() {
                 </AuthLayout>
             ) : (
                 <Routes>
-                    {/* Add other clean pages here */}
+                    <Route path="/" element={<Home />} />
                 </Routes>
             )}
         </>
