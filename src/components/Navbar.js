@@ -23,11 +23,8 @@ const Navbar = () => {
 
             {/* Navigation Links */}
             <div className="flex items-center gap-6">
-                <NavLink to="/" className={linkClass}>
-                    Home
-                </NavLink>
 
-                <NavLink to="/dashboard" className={linkClass}>
+                <NavLink to="/" className={linkClass}>
                     Dashboard
                 </NavLink>
 
