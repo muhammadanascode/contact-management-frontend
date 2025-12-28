@@ -7,23 +7,21 @@ const Navbar = () => {
             : "text-gray-600 hover:text-purple-600";
 
     return (
-        <nav className="bg-white shadow-sm px-6 py-4 flex justify-between items-center">
+        <nav className="bg-white shadow-sm px-4 sm:px-6 py-3 sm:py-4 flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-0">
             {/* Logo / App Name */}
-            <div className="flex items-center gap-6 ">
+            <div className="flex items-center gap-3 sm:gap-6">
                 <img
                     src="social-media.png"
-                    className="h-8 w-8 sm:h-10 sm:w-10 object-contain"
+                    className="h-7 w-7 sm:h-10 sm:w-10 object-contain"
                     alt="Logo"
-
                 />
-                <h1 className="text-xl font-bold text-gray-800">
+                <h1 className="text-base sm:text-xl font-bold text-gray-800">
                     ConnectHub CMS
                 </h1>
             </div>
 
             {/* Navigation Links */}
-            <div className="flex items-center gap-6">
-
+            <div className="flex items-center gap-4 sm:gap-6 text-sm sm:text-base">
                 <NavLink to="/" className={linkClass}>
                     Dashboard
                 </NavLink>
@@ -34,12 +32,12 @@ const Navbar = () => {
             </div>
 
             {/* User Actions */}
-            <div className="flex items-center gap-4">
-                <span className="text-sm text-gray-600">
+            <div className="flex items-center gap-2 sm:gap-4">
+                <span className="hidden sm:inline text-xs sm:text-sm text-gray-600">
                     Welcome, Alex Smith
                 </span>
 
-                <button className="bg-red-500 text-white px-4 py-1.5 rounded-md text-sm">
+                <button className="bg-red-500 text-white px-3 sm:px-4 py-1 sm:py-1.5 rounded-md text-xs sm:text-sm hover:bg-red-600 transition">
                     Logout
                 </button>
             </div>
