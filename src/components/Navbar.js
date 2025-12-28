@@ -7,7 +7,7 @@ const Navbar = () => {
             : "text-gray-600 hover:text-purple-600";
 
     return (
-        <nav className="bg-white shadow-sm px-4 sm:px-6 py-3 sm:py-4 flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-0">
+        <nav className="bg-white shadow-sm px-4 sm:px-6 py-3 sm:py-4 flex flex-row sm:flex-row justify-between items-center gap-3 sm:gap-0">
             {/* Logo / App Name */}
             <div className="flex items-center gap-3 sm:gap-6">
                 <img
