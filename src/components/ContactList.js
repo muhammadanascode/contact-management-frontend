@@ -47,7 +47,7 @@ const ContactList = () => {
 
     return (
         // Container card
-        <div className="bg-white rounded-lg shadow">
+        <div className="bg-white rounded-lg shadow mt-5">
             {/* Table showing contact rows */}
             <table className="w-full text-left">
                 <thead className="bg-gray-100">
