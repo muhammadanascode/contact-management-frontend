@@ -1,5 +1,4 @@
 import ContactList from "./ContactList";
-import Navbar from "./Navbar";
 import SearchBar from "./SearchBar";
 import Button from "./Button";
 import Modal from "./Modal";
@@ -25,7 +24,6 @@ const Dashboard = () => {
 
     return (
         <div className="min-h-screen bg-gray-100">
-            <Navbar />
 
             <main className="max-w-6xl mx-auto p-6">
                 {/* Search + Action Row */}
