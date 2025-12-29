@@ -6,7 +6,8 @@ import Button from "./Button"; // Reusable button component
 function AuthForm({ type }) {
 
     // Using local state for form fields
-    const [name, setName] = useState("");
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -24,7 +25,7 @@ function AuthForm({ type }) {
              w-full
              max-w-md
              min-h-[80vh] sm:min-h-0
-             p-6 sm:p-8
+             p-6 sm:p-6
              rounded-xl
              bg-purple-50/70 backdrop-blur-md
              border border-purple-100/40
@@ -64,11 +65,17 @@ function AuthForm({ type }) {
 
                 {/* Conditionally render Fullname input for Signup */}
                 {type !== "Login" ? <div className="flex flex-col">
-                    <label className="mb-1 text-gray-700 font-medium">Fullname:</label>
+                    <label className="mb-1 text-gray-700 font-medium">Firstname:</label>
                     <InputField
                         type={"text"}
-                        value={name}
-                        setValue={setName}
+                        value={firstName}
+                        setValue={setFirstName}
+                    />
+                    <label className="mb-1 text-gray-700 font-medium">Lastname:</label>
+                    <InputField
+                        type={"text"}
+                        value={lastName}
+                        setValue={setLastName}
                     />
                 </div> : null}
 
@@ -110,7 +117,7 @@ function AuthForm({ type }) {
                         </Link>
                     </p>
                 ) : (
-                    <p className="text-center text-sm text-gray-600 mt-4">
+                    <p className="text-center text-sm text-gray-600 mt-2">
                         Already registered?{" "}
                         <Link
                             to="/login"
