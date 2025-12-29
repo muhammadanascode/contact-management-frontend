@@ -4,6 +4,7 @@ import AuthLayout from "../components/AuthLayout";
 import { Route, Routes, useLocation } from "react-router-dom";
 import Home from "../pages/Home";
 import Profile from "../pages/Profile";
+import Navbar from "../components/Navbar";
 
 
 function AppContent() {
@@ -23,10 +24,13 @@ function AppContent() {
                     </Routes>
                 </AuthLayout>
             ) : (
-                <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/profile" element={<Profile />} />
-                </Routes>
+                <>
+                    <Navbar />
+                    <Routes>
+                        <Route path="/" element={<Home />} />
+                        <Route path="/profile" element={<Profile />} />
+                    </Routes>
+                </>
             )}
         </>
     );
