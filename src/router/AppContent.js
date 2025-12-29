@@ -24,13 +24,13 @@ function AppContent() {
                     </Routes>
                 </AuthLayout>
             ) : (
-                <>
+                <div className="min-h-screen bg-gray-100">
                     <Navbar />
                     <Routes>
                         <Route path="/" element={<Home />} />
                         <Route path="/profile" element={<Profile />} />
                     </Routes>
-                </>
+                </div>
             )}
         </>
     );
