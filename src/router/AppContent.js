@@ -2,6 +2,8 @@ import Login from "../pages/Login";
 import Signup from "../pages/Signup";
 import AuthLayout from "../components/AuthLayout";
 import { Route, Routes, useLocation } from "react-router-dom";
+import { useEffect } from 'react';
+import NProgress from 'nprogress';
 import Home from "../pages/Home";
 import Profile from "../pages/Profile";
 import Navbar from "../components/Navbar";
@@ -9,6 +11,11 @@ import Navbar from "../components/Navbar";
 
 function AppContent() {
     const location = useLocation();
+
+    // Stop progress bar when navigation completes
+    useEffect(() => {
+        NProgress.done();
+    }, [location]);
 
     // Show AuthLayout only on login/signup
     const isAuthPage =
