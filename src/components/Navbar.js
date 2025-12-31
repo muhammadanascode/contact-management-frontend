@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import NProgress from 'nprogress';
+// import NProgress from 'nprogress';
 
 const Navbar = () => {
     const linkClass = ({ isActive }) =>
@@ -23,11 +23,11 @@ const Navbar = () => {
 
             {/* Navigation Links */}
             <div className="flex items-center gap-4 sm:gap-6 text-sm sm:text-base">
-                <NavLink to="/" className={linkClass} onClick={() => NProgress.start()}>
+                <NavLink to="/" className={linkClass}>
                     Dashboard
                 </NavLink>
 
-                <NavLink to="/profile" className={linkClass} onClick={() => NProgress.start()}>
+                <NavLink to="/profile" className={linkClass}>
                     Profile
                 </NavLink>
             </div>
