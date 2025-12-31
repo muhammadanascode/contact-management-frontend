@@ -61,6 +61,11 @@ const Dashboard = () => {
                     />
                 </Modal>
 
+                {/* Contact List Header */}
+                <div className="mt-8">
+                    <h4 className="text-lg font-semibold">All Contacts</h4>
+                </div>
+
                 {/* Contact List Table */}
                 <ContactList />
             </main>
