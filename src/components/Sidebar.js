@@ -18,9 +18,9 @@ const Sidebar = ({ isOpen, onClose }) => {
 
             {/* Sidebar */}
             {isOpen && (
-                <div className="sm:hidden fixed left-0 top-0 h-full w-64 bg-white shadow-lg z-50 pt-2 px-4">
+                <div className="sm:hidden fixed left-0 top-0 h-full w-64 bg-white shadow-lg z-50 pt-2 px-4 flex flex-col">
                     <button
-                        className="mb-6 text-gray-800 text-xl font-bold"
+                        className="mb-6 text-gray-800 text-xl font-bold text-left"
                         onClick={onClose}
                     >
                         &times;
@@ -38,7 +38,7 @@ const Sidebar = ({ isOpen, onClose }) => {
                         </h1>
                     </div>
 
-                    <nav className="flex flex-col gap-4">
+                    <nav className="flex flex-col gap-4 flex-1">
                         <NavLink
                             to="/"
                             className={({ isActive }) =>
@@ -67,8 +67,8 @@ const Sidebar = ({ isOpen, onClose }) => {
                     </nav>
 
                     {/* Profile Section */}
-                    <div className="mt-10 border-t pt-4">
-                        <h2 className="text-md font-semibold mb-4 text-gray-800">
+                    <div className="mt-auto border-t pt-4">
+                        <h2 className="text-md font-semibold mb-4 text-gray-800 text-center">
                             Welcome, Alex Smith
                         </h2>
                     </div>
