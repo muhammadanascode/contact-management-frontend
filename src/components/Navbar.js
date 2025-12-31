@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
 // import NProgress from 'nprogress';
+import logo from '../assests/images/social-media.png';
 
 const Navbar = () => {
     const linkClass = ({ isActive }) =>
@@ -12,7 +13,7 @@ const Navbar = () => {
             {/* Logo / App Name */}
             <div className="flex items-center gap-3 sm:gap-6">
                 <img
-                    src="social-media.png"
+                    src={logo}
                     className="h-7 w-7 sm:h-10 sm:w-10 object-contain"
                     alt="Logo"
                 />

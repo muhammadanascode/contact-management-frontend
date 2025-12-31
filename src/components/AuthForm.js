@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import InputField from "./InputField"; // Reusable input component
 import Button from "./Button"; // Reusable button component
+import logo from '../assests/images/management.png';
 
 function AuthForm({ type }) {
 
@@ -42,7 +43,7 @@ function AuthForm({ type }) {
 
                     {/* Logo */}
                     <img
-                        src="/management.png"
+                        src={logo}
                         alt="Social media"
                         className="w-24 h-24 mx-auto mb-1"
                     />

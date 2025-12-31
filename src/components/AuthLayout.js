@@ -1,3 +1,5 @@
+import logo from '../assests/images/landing-img.png';
+
 function AuthLayout({ children }) {
     return (
         <div className="min-h-screen flex flex-col md:flex-row">
@@ -6,7 +8,7 @@ function AuthLayout({ children }) {
                       bg-purple-950 text-white
                       flex items-center justify-center p-8">
                 <div className="max-w-md flex flex-col items-center justify-center text-center space-y-6">
-                    <img src="landing-img.png" alt="Landing Illustration" className="w-48 md:w-64 rounded-lg" />
+                    <img src={logo} alt="Landing Illustration" className="w-48 md:w-64 rounded-lg" />
                     <h1 className="text-3xl md:text-4xl font-bold">ConnectHub - CMS</h1>
                     <p className="text-purple-100 text-lg max-w-xs md:max-w-md">
                         Manage your contacts securely and efficiently. With our intuitive interface, you can easily add, edit, and organize your contacts. Simple, fast, and reliable.
