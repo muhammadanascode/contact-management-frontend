@@ -116,7 +116,7 @@ const ContactList = () => {
             />
 
             {/* Summary text: shows the visible range and total count */}
-            <div className="px-4 pb-4 text-sm text-gray-500">
+            <div className="px-4 pb-4 text-sm text-gray-500 mt-4">
                 Showing {start + 1} to {Math.min(start + ITEMS_PER_PAGE, contacts.length)} of {contacts.length} entries
             </div>
 

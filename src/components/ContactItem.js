@@ -9,7 +9,7 @@ const ContactItem = ({ contact, onEdit, onDelete }) => {
     return (
         <>
             {/* Contact row container: flex layout with space between content and action buttons */}
-            <div className="flex flex-row justify-between bg-white rounded-lg shadow mt-2 w-full">
+            <div className="flex flex-row justify-between bg-white rounded-lg shadow mt-4 w-full">
                 {/* Left section: contact avatar/logo and contact details */}
                 <div className='flex flex-row gap-2 items-center ml-4'>
                     {/* Contact avatar icon */}
