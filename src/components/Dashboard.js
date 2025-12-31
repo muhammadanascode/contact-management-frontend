@@ -32,7 +32,7 @@ const Dashboard = () => {
 
                     <Button
                         text="+ Add Contact"
-                        className="w-full sm:w-auto px-6 py-2 shrink-0 bg-green-600 hover:bg-green-700 "
+                        className=" px-6 py-2 shrink-0 rounded-full"
                         onClick={() => setIsOpen(true)}
                     />
                 </div>
