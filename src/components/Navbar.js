@@ -1,5 +1,4 @@
 import { NavLink } from "react-router-dom";
-// import NProgress from 'nprogress';
 import logo from '../assests/images/social-media.png';
 
 const Navbar = () => {
