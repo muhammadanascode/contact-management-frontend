@@ -14,7 +14,10 @@ const Navbar = () => {
     return (
         <>
             <nav className="bg-white shadow-sm px-4 sm:px-6 py-3 sm:py-4 flex flex-row sm:flex-row justify-between items-center gap-3 sm:gap-0">
-                
+
+              {/* Wrapping hamburger menu and logo in same div to have small space between them
+              on mobile screen */}
+                <div className="flex items-center gap-3">
              {/* Hamburger Menu - Visible on Mobile */}
                 <button
                     className="sm:hidden flex flex-col gap-1"
@@ -36,6 +39,7 @@ const Navbar = () => {
                 <h1 className="text-base sm:text-xl font-bold text-gray-800">
                     ConnectHub CMS
                 </h1>
+            </div>
             </div>
 
             {/* Navigation Links */}
