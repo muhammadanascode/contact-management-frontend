@@ -68,25 +68,14 @@ const ContactList = () => {
     }
 
     return (
-        // Container card
-        <div className="bg-white rounded-lg shadow mt-5">
-            {/* Table showing contact rows */}
-            <table className="w-full text-left">
-                <thead className="bg-gray-100">
-                    <tr>
-                        <th className="py-3 px-4">Name</th>
-                        <th className="py-3 px-4">Phone Number</th>
-                        <th className="py-3 px-4 text-right">Actions</th>
-                    </tr>
-                </thead>
+        <>
+        <div className="flex flex-col justify-center items-center">
+            {/* Render a ContactItem for each contact on the current page */}
+            {paginatedContacts.map((contact) => (
+                <ContactItem key={contact.id} contact={contact} onEdit={handleEdit} onDelete={helper} />
+            ))}
 
-                <tbody>
-                    {/* Render a ContactItem for each contact on the current page */}
-                    {paginatedContacts.map((contact) => (
-                        <ContactItem key={contact.id} contact={contact} onEdit={handleEdit} onDelete={helper} />
-                    ))}
-                </tbody>
-            </table>
+            </div>
 
             {/* Modals must NOT be placed inside a <table> (invalid HTML). */}
             {/* Render modal components here as siblings of the table. */}
@@ -141,7 +130,7 @@ const ContactList = () => {
                 totalPages={totalPages}
                 onPageChange={setCurrentPage}
             />
-        </div>
+        </>
     );
 };
 
