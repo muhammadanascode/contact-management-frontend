@@ -38,6 +38,7 @@ const Sidebar = ({ isOpen, onClose }) => {
                         </h1>
                     </div>
 
+                    {/* Navigation Links */}
                     <nav className="flex flex-col gap-4 flex-1">
                         <NavLink
                             to="/"
