@@ -46,13 +46,13 @@ function Modal({
               type="button"
               text="Cancel"
               onClick={onClose}
-              className="w-full sm:w-auto px-6 py-2 shrink-0 bg-gray-500 hover:bg-gray-800"
+              className="px-6 py-2 shrink-0 bg-gray-600 hover:bg-gray-800"
             />
 
             <Button
               type="submit"
               text={mode === "edit" ? "Update" : "Create"}
-              className="w-full sm:w-auto px-6 py-2 shrink-0 "
+              className="px-6 py-2 shrink-0"
             />
           </div>
         </form>
