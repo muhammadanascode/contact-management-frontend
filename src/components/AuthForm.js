@@ -4,7 +4,7 @@ import InputField from "./InputField"; // Reusable input component
 import Button from "./Button"; // Reusable button component
 import logo from '../assests/images/management.png';
 
-function AuthForm({ type }) {
+function AuthForm({ type, handleSignup }) {
 
     // Using local state for form fields
     const [firstName, setFirstName] = useState("");
@@ -15,7 +15,9 @@ function AuthForm({ type }) {
     // Handle form submission; currently just alerts for demo purposes
     const handleSubmit = (e) => {
         e.preventDefault();
-        alert(`${type} submitted: ${email}`);
+        if (type === "Signup"){
+            handleSignup(firstName, lastName, email, password);
+        }
     };
 
     return (
