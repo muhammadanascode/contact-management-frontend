@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import InputField from "./InputField"; // Reusable input component
 import Button from "./Button"; // Reusable button component
 import logo from '../assests/images/management.png';
 
-function AuthForm({ type, handleSignup }) {
+function AuthForm({ type, handleSignup, handleSignIn }) {
 
     // Using local state for form fields
     const [firstName, setFirstName] = useState("");
@@ -12,11 +12,37 @@ function AuthForm({ type, handleSignup }) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
+    // Navigate hook for redirection
+    const navigate = useNavigate();
+
     // Handle form submission; currently just alerts for demo purposes
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (type === "Signup"){
+        if (type === "Signup") {
+
+            // Call the passed handleSignup function
             handleSignup(firstName, lastName, email, password);
+
+            // Clear fields after signup
+            setFirstName("");
+            setLastName("");
+            setEmail("");
+            setPassword("");
+
+            // Redirect to login after signup
+            navigate("/login");
+
+        } else {
+
+            // Call the passed handleSignIn function
+            handleSignIn(email, password);
+
+            // Clear fields after signin
+            setEmail("");
+            setPassword("");
+
+            // Redirect to home page after signup
+            navigate("/");
         }
     };
 
