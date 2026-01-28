@@ -6,8 +6,7 @@ function Login() {
 
   // Handler to pass to AuthForm for signin
     const handleSignIn = async ( email, password) => {
-      const res = await signin(email, password);
-      return res;
+      return await signin(email, password);
     }
 
   return (
