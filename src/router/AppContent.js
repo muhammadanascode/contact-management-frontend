@@ -5,6 +5,7 @@ import { Route, Routes, useLocation } from "react-router-dom";
 import Home from "../pages/Home";
 import Profile from "../pages/Profile";
 import Navbar from "../components/Navbar";
+import ProtectedRoute from "../components/ProtectedRoute";
 
 
 function AppContent() {
@@ -27,8 +28,16 @@ function AppContent() {
                 <div className="min-h-screen bg-gray-100">
                     <Navbar />
                     <Routes>
-                        <Route path="/" element={<Home />} />
-                        <Route path="/profile" element={<Profile />} />
+                        <Route path="/" element={
+                            <ProtectedRoute>
+                                <Home />
+                            </ProtectedRoute>
+                        } />
+                        <Route path="/profile" element={
+                            <ProtectedRoute>
+                                <Profile />
+                            </ProtectedRoute>
+                        } />
                     </Routes>
                 </div>
             )}
