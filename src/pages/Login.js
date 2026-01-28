@@ -5,8 +5,9 @@ import { signin } from "../services/AuthService";
 function Login() {
 
   // Handler to pass to AuthForm for signin
-    const handleSignIn = ( email, password) => {
-      signin(email, password);
+    const handleSignIn = async ( email, password) => {
+      const res = await signin(email, password);
+      return res;
     }
 
   return (

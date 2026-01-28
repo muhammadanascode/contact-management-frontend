@@ -16,12 +16,14 @@ function AuthForm({ type, handleSignup, handleSignIn }) {
     const navigate = useNavigate();
 
     // Handle form submission; currently just alerts for demo purposes
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if (type === "Signup") {
 
             // Call the passed handleSignup function
-            handleSignup(firstName, lastName, email, password);
+            const res = await handleSignup(firstName, lastName, email, password);
+
+            if (res === false) return;
 
             // Clear fields after signup
             setFirstName("");
@@ -35,7 +37,9 @@ function AuthForm({ type, handleSignup, handleSignIn }) {
         } else {
 
             // Call the passed handleSignIn function
-            handleSignIn(email, password);
+            const res = await handleSignIn(email, password);
+
+            if (res === false) return;
 
             // Clear fields after signin
             setEmail("");
