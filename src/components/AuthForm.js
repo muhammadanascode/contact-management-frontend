@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import InputField from "./InputField"; // Reusable input component
 import Button from "./Button"; // Reusable button component
 import logo from '../assests/images/management.png';
+import { useAuth } from "../context/AuthContext";
 
 function AuthForm({ type, handleSignup, handleSignIn }) {
 
@@ -15,6 +16,8 @@ function AuthForm({ type, handleSignup, handleSignIn }) {
     // Navigate hook for redirection
     const navigate = useNavigate();
 
+    const { login } = useAuth();
+
     // Handle form submission; currently just alerts for demo purposes
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -23,7 +26,7 @@ function AuthForm({ type, handleSignup, handleSignIn }) {
             // Call the passed handleSignup function
             const res = await handleSignup(firstName, lastName, email, password);
 
-            if (res === false) return;
+            if (!res) return;
 
             // Clear fields after signup
             setFirstName("");
@@ -39,11 +42,14 @@ function AuthForm({ type, handleSignup, handleSignIn }) {
             // Call the passed handleSignIn function
             const res = await handleSignIn(email, password);
 
-            if (res === false) return;
+            if (!res) return;
 
             // Clear fields after signin
             setEmail("");
             setPassword("");
+
+            // Save token in local storage
+            login(res.token)
 
             // Redirect to home page after signup
             navigate("/");
