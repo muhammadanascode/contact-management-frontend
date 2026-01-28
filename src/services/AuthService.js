@@ -15,8 +15,11 @@ export const signup = async (firstName, lastName, email, password) => {
             toast.success("Account created successfully");
         }
 
+        return true;
+
     } catch (err) {
         toast.error(err?.response?.data?.message || "Error occured");
+        return false;
     }
 }
 
@@ -32,9 +35,10 @@ export const signin = async (email, password) => {
       const token = res.data.token; 
       localStorage.setItem("token", token); // Save token to localStorage
       toast.success("Login successful");
-      return token; // optional, useful if you want it in component
+      return true;
     }
   } catch (err) {
     toast.error(err?.response?.data?.message || "Error occurred");
+    return false;
   }
 };
