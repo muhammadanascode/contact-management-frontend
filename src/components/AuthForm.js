@@ -49,7 +49,7 @@ function AuthForm({ type, handleSignup, handleSignIn }) {
             setPassword("");
 
             // Save token in local storage
-            login(res.token)
+            login(res?.data?.token)
 
             // Redirect to home page after signup
             navigate("/");
