@@ -2,9 +2,11 @@ import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import logo from '../assests/images/social-media.png';
 import Sidebar from './Sidebar';
+import { useAuth } from "../context/AuthContext";
 
 const Navbar = () => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
+    const {logout} = useAuth();
 
     const linkClass = ({ isActive }) =>
         isActive
@@ -59,7 +61,9 @@ const Navbar = () => {
                         Welcome, Alex Smith
                     </span>
 
-                    <button className="bg-red-500 text-white px-3 sm:px-4 py-1 sm:py-1.5 rounded-md text-xs sm:text-sm hover:bg-red-600 transition">
+                    <button className="bg-red-500 text-white px-3 sm:px-4 py-1 sm:py-1.5 rounded-md text-xs sm:text-sm hover:bg-red-600 transition"
+                    onClick={()=>logout()}
+                    >
                         Logout
                     </button>
 
