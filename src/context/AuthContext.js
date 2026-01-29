@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { isTokenValid } from "../utils/validation.js";
 
 const AuthContext = createContext(null);
 
@@ -9,8 +10,10 @@ export const AuthProvider = ({ children }) => {
     // Load token on app start
     useEffect(() => {
         const storedToken = localStorage.getItem("token");
-        if (storedToken) {
+        if (storedToken && isTokenValid(storedToken)) {
             setToken(storedToken);
+        } else {
+            localStorage.removeItem("token");
         }
         setLoading(false);
     }, []);
