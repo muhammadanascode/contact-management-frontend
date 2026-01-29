@@ -6,6 +6,7 @@ import Home from "../pages/Home";
 import Profile from "../pages/Profile";
 import Navbar from "../components/Navbar";
 import ProtectedRoute from "../components/ProtectedRoute";
+import UnprotectedRoute from "../components/UnprotectedRoute.js";
 
 
 function AppContent() {
@@ -20,8 +21,15 @@ function AppContent() {
             {isAuthPage ? (
                 <AuthLayout>
                     <Routes>
-                        <Route path="/login" element={<Login />} />
-                        <Route path="/signup" element={<Signup />} />
+                        <Route path="/login" element={
+                            <UnprotectedRoute>
+                                <Login />
+                            </UnprotectedRoute>} />
+                        <Route path="/signup" element={
+                            <UnprotectedRoute>
+                                <Signup />
+                            </UnprotectedRoute>
+                        } />
                     </Routes>
                 </AuthLayout>
             ) : (
