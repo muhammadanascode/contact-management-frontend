@@ -23,7 +23,7 @@ const Profile = () => {
         };
 
         fetchProfile();
-    }, []);
+    }, [token]);
 
     if (loading) return <p>Loading profile...</p>;
     if (!profile) return <p>Failed to load profile</p>;
