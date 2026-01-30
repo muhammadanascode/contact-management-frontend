@@ -2,13 +2,17 @@ import { useState } from "react";
 import Button from "../components/Button";
 import Modal from "./Modal";
 import InputField from "./InputField";
+import { updatePassword } from "../services/ProfileService";
+import { useAuth } from "../context/AuthContext";
 
 /**
  * ProfilePage
  * - Displays user profile information (name, email, password).
  * - Provides ability to update password via a modal.
  */
-function ProfilePage({profile}) {
+function ProfilePage({ profile }) {
+
+    const { token } = useAuth();
 
     // Modal visibility state
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -21,18 +25,28 @@ function ProfilePage({profile}) {
     /**
      * handleUpdatePassword
      * - Called on password update modal submit.
-     * - Logs password values (TODO: send to backend).
+     * - update password field
      * - Resets form fields after submission.
+     * - Close the modal
      */
-    const handleUpdatePassword = (e) => {
+    const handleUpdatePassword = async (e) => {
+        //prevents reload
         e.preventDefault();
-        console.log("Current Password: " + currentPassword);
-        console.log("New Password: " + newPassword);
-        console.log("Confirm New Password: " + confirmNewPassword);
-        // TODO: validate passwords match, send to backend, show success/error
+        //update password
+        const status = await updatePassword(
+            currentPassword,
+            newPassword,
+            confirmNewPassword,
+            token);
+
+        // if updates fails
+        if (status !== 204) {
+            return;
+        }
         setCurrentPassword("");
         setNewPassword("");
         setConfirmNewPassword("");
+        setIsModalOpen(false);
     }
 
     return (
@@ -53,6 +67,7 @@ function ProfilePage({profile}) {
 
                     title={"Update Password"}
                     onSubmit={handleUpdatePassword}
+                    mode="edit"
                 >
                     {/* Current password input */}
                     <InputField
