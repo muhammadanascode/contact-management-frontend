@@ -7,14 +7,8 @@ import InputField from "./InputField";
  * ProfilePage
  * - Displays user profile information (name, email, password).
  * - Provides ability to update password via a modal.
- * - TODO: integrate with AuthContext/backend to fetch and persist user data.
  */
-function ProfilePage() {
-    // Temporary static user data (will come from backend/context later)
-    const user = {
-        fullName: "John Doe",
-        email: "john.doe@example.com",
-    };
+function ProfilePage({profile}) {
 
     // Modal visibility state
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -112,7 +106,7 @@ function ProfilePage() {
                                 Full Name
                             </label>
                             <p className="mt-1 text-gray-800">
-                                {user.fullName}
+                                {profile?.firstName} {profile?.lastName}
                             </p>
                         </div>
 
@@ -122,7 +116,7 @@ function ProfilePage() {
                                 Email
                             </label>
                             <p className="mt-1 text-gray-800">
-                                {user.email}
+                                {profile?.email}
                             </p>
                         </div>
 
