@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ContactItem from "./ContactItem";
 import Pagination from "./Pagination";
 import Modal from "./Modal";
 import InputField from "./InputField";
 import ConfirmModal from "./ConfirmModal.js";
 import { useAuth } from "../context/AuthContext";
-import { deleteContact, getAllContacts, updateContact } from "../services/ContactService.js";
+import { deleteContact, updateContact } from "../services/ContactService.js";
 
 // Number of contacts to show per page for pagination
 const ITEMS_PER_PAGE = 5;
@@ -39,15 +39,6 @@ const ContactList = ({ contacts, setContacts }) => {
 
     // Contact selected for deletion
     const [contactToDelete, setContactToDelete] = useState(null);
-
-    //fetch contacts
-    useEffect(() => {
-        const fetchContacts = async () => {
-            const res = await getAllContacts(token);
-            setContacts(res);
-        }
-        fetchContacts();
-    }, [contacts])
 
     // Compute total pages from contacts length
     const totalPages = Math.ceil(contacts.length / ITEMS_PER_PAGE);

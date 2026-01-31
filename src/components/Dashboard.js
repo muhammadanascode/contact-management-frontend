@@ -3,8 +3,8 @@ import SearchBar from "./SearchBar";
 import Button from "./Button";
 import Modal from "./Modal";
 import InputField from "./InputField";
-import { useState } from "react";
-import { createContact } from "../services/ContactService";
+import { useEffect, useState } from "react";
+import { createContact, getAllContacts } from "../services/ContactService";
 import { useAuth } from "../context/AuthContext";
 
 const Dashboard = () => {
@@ -20,6 +20,16 @@ const Dashboard = () => {
     const [emailLabel, setEmailLabel] = useState("")
     const [phoneNumber, setPhoneNumber] = useState("");
     const [phoneNumberLabel, setPhoneNumberLabel] = useState("");
+
+
+    //fetch contacts
+    useEffect(() => {
+        const fetchContacts = async () => {
+            const res = await getAllContacts(token);
+            setContacts(res);
+        }
+        fetchContacts();
+    }, [contacts])
 
     // Handle form submission
     const handleSubmit = async (e) => {
