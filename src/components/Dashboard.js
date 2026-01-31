@@ -57,6 +57,7 @@ const Dashboard = () => {
         setEmail("");
         setEmailLabel("");
         setPhoneNumber("");
+        setPhoneNumberLabel("");
     }
 
     return (
