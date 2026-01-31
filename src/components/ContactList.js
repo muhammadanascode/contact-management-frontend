@@ -1,10 +1,11 @@
-import { useState } from "react";
-import { contacts } from "../data/contacts.js";
+import { useEffect, useState } from "react";
 import ContactItem from "./ContactItem";
 import Pagination from "./Pagination";
 import Modal from "./Modal";
 import InputField from "./InputField";
 import ConfirmModal from "./ConfirmModal.js";
+import { useAuth } from "../context/AuthContext";
+import { deleteContact, getAllContacts, updateContact } from "../services/ContactService.js";
 
 // Number of contacts to show per page for pagination
 const ITEMS_PER_PAGE = 5;
@@ -14,13 +15,21 @@ const ITEMS_PER_PAGE = 5;
  * - Renders a paginated table of contacts.
  * - Keeps pagination state locally and slices the contacts array.
  */
-const ContactList = () => {
+const ContactList = ({ contacts, setContacts }) => {
+
+    const { token } = useAuth();
+
     // Current page (1-based index)
     const [currentPage, setCurrentPage] = useState(1);
 
     // Form state for editing 
-    const [name, setName] = useState("");
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [email, setEmail] = useState("");
+    const [emailLabel, setEmailLabel] = useState("")
     const [phoneNumber, setPhoneNumber] = useState("");
+    const [phoneNumberLabel, setPhoneNumberLabel] = useState("");
+    const [editingId, setEditingId] = useState(null);
 
     // Modal open state
     const [isOpen, setIsOpen] = useState(false);
@@ -30,6 +39,15 @@ const ContactList = () => {
 
     // Contact selected for deletion
     const [contactToDelete, setContactToDelete] = useState(null);
+
+    //fetch contacts
+    useEffect(() => {
+        const fetchContacts = async () => {
+            const res = await getAllContacts(token);
+            setContacts(res);
+        }
+        fetchContacts();
+    }, [contacts])
 
     // Compute total pages from contacts length
     const totalPages = Math.ceil(contacts.length / ITEMS_PER_PAGE);
@@ -41,16 +59,42 @@ const ContactList = () => {
     const paginatedContacts = contacts.slice(start, start + ITEMS_PER_PAGE);
 
     const handleEdit = (contact) => {
-        console.log("Edit contact: " + contact.name + ", " + contact.phone);
-        setName(contact.name);
-        setPhoneNumber(contact.phone);
+        setEditingId(contact.id);
+        setFirstName(contact.firstName);
+        setLastName(contact.lastName);
+        setEmail(contact.email);
+        setEmailLabel(contact.emailLabel);
+        setPhoneNumber(contact.phoneNumber);
+        setPhoneNumberLabel(contact.phoneNumberLabel);
         setIsOpen(true);
     }
 
-    const handleSubmit = (e) => {
-        //TODO: implement update logic
+    const handleSubmit = async (e) => {
+        //prevents reload
         e.preventDefault();
-        console.log("Name: " + name, "phoneNumber: " + phoneNumber);
+
+        //update contact service
+        const updatedContact = await updateContact(
+            editingId,
+            firstName,
+            lastName,
+            email,
+            emailLabel,
+            phoneNumber,
+            phoneNumberLabel,
+            token
+        )
+        if (!updatedContact) {
+            return;
+        }
+        // Update contacts array in state
+        setContacts((prevContacts) =>
+            prevContacts.map((contact) =>
+                contact.id === editingId ? updatedContact : contact
+            )
+        );
+        setIsOpen(false);
+        setEditingId(null);
     }
 
     const helper = (contact) => {
@@ -58,22 +102,35 @@ const ContactList = () => {
         setIsConfirmOpen(true);
     }
 
-    const handleDelete = () => {
-        // TODO: perform actual delete via API
-        console.log("Delete contact: " + contactToDelete.name + ", " + contactToDelete.phone);
-        // Close confirm modal and clear selection. Actual removal should be
-        // handled by app state (e.g., ContactsContext) or by mutating local state.
-        setIsConfirmOpen(false);
+    const handleDelete = async () => {
+        if (!contactToDelete) return;
+
+        // Call delete API with the contact ID
+        const success = await deleteContact(contactToDelete.id, token);
+
+        if (success) {
+            // Remove deleted contact from state
+            setContacts((prev) =>
+                prev.filter((contact) => contact.id !== contactToDelete.id)
+            );
+        }
+
+        // Close modal and clear selection
         setContactToDelete(null);
-    }
+        setIsConfirmOpen(false);
+    };
+
 
     return (
         <>
-        <div className="flex flex-col justify-center items-center">
-            {/* Render a ContactItem for each contact on the current page */}
-            {paginatedContacts.map((contact) => (
-                <ContactItem key={contact.id} contact={contact} onEdit={handleEdit} onDelete={helper} />
-            ))}
+            <div className="flex flex-col justify-center items-center">
+                {/* Render a ContactItem for each contact on the current page */}
+                {contacts.length > 0 ? (paginatedContacts.map((contact) => (
+                    <ContactItem key={contact.id} contact={contact} onEdit={handleEdit} onDelete={helper} />
+                ))) :
+                    // Show when there are no contacts
+                    <div className="text-gray-500 mt-4">No contacts available.</div>
+                }
 
             </div>
 
@@ -84,19 +141,44 @@ const ContactList = () => {
                 onClose={() => setIsOpen(false)}
                 title={"Edit contact"}
                 onSubmit={handleSubmit}
+                mode="edit"
             >
                 <InputField
                     type="text"
-                    value={name}
-                    setValue={setName}
-                    placeholder="Name"
+                    value={firstName}
+                    setValue={setFirstName}
+                    placeholder="Firstname"
                 />
 
+                <InputField
+                    type="text"
+                    value={lastName}
+                    setValue={setLastName}
+                    placeholder="Lastname"
+                />
+                <InputField
+                    type="text"
+                    value={email}
+                    setValue={setEmail}
+                    placeholder="Email"
+                />
+                <InputField
+                    type="text"
+                    value={emailLabel}
+                    setValue={setEmailLabel}
+                    placeholder="Email Label"
+                />
                 <InputField
                     type="text"
                     value={phoneNumber}
                     setValue={setPhoneNumber}
                     placeholder="Phone Number"
+                />
+                <InputField
+                    type="text"
+                    value={phoneNumberLabel}
+                    setValue={setPhoneNumberLabel}
+                    placeholder="Phone No. label"
                 />
             </Modal>
 
@@ -116,20 +198,21 @@ const ContactList = () => {
             />
 
             {/* Summary text: shows the visible range and total count */}
-            <div className="px-4 pb-4 text-sm text-gray-500 mt-4">
+            {contacts.length > 0 && (<div className="px-4 pb-4 text-sm text-gray-500 mt-4">
                 Showing {start + 1} to {Math.min(start + ITEMS_PER_PAGE, contacts.length)} of {contacts.length} entries
-            </div>
+            </div>)}
 
             {/* Pagination control
                 - currentPage: current page index
                 - totalPages: total number of pages
                 - onPageChange: function to change the page
             */}
-            <Pagination
+            {contacts.length > 0 && (<Pagination
                 currentPage={currentPage}
                 totalPages={totalPages}
                 onPageChange={setCurrentPage}
             />
+            )}
         </>
     );
 };
