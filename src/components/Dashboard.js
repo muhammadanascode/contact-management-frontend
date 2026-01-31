@@ -30,7 +30,7 @@ const Dashboard = () => {
             setContacts(res);
         }
         fetchContacts();
-    }, [contacts])
+    }, [])
 
     // Handle form submission
     const handleSubmit = async (e) => {
