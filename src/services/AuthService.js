@@ -6,10 +6,10 @@ import * as Validator from "../utils/validation.js";
 export const signup = async (firstName, lastName, email, password) => {
   try {
     if (!Validator.validateName(firstName)) {
-      throw new Error("First name must be between 3 and 50 characters long");
+      throw new Error("First name must be between 3 and 100 characters long");
     }
     if (!Validator.validateName(lastName)) {
-      throw new Error("Last name must be between 3 and 50 characters long");
+      throw new Error("Last name must be between 3 and 100 characters long");
     }
     if (!Validator.validateEmail(email)) {
       throw new Error("Invalid email format");
