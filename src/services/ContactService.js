@@ -12,7 +12,7 @@ export const getAllContacts = async (token) => {
         });
         return res.data;
     } catch (err) {
-        toast.error(err?.response?.data?.message || "Failed to fetch profile");
+        toast.error(err?.response?.data?.message || "Failed to fetch contacts");
         return null;
     }
 }
