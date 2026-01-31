@@ -12,6 +12,7 @@ const Dashboard = () => {
     const { token } = useAuth();
 
     //State to control modal visibility and form inputs
+    const [contacts, setContacts] = useState([]);
     const [isOpen, setIsOpen] = useState(false);
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
@@ -23,7 +24,7 @@ const Dashboard = () => {
     // Handle form submission
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const res = await createContact(
+        const newContact = await createContact(
             firstName,
             lastName,
             email,
@@ -32,12 +33,20 @@ const Dashboard = () => {
             phoneNumberLabel,
             token
         )
-        if (!res) {
-            return;
-        }
-        setIsOpen(false);
-    }
+        if (!newContact) return;
 
+        // Update shared state
+        setContacts((prev) => [newContact, ...prev]);
+
+        setIsOpen(false);
+
+        // Reset form
+        setFirstName("");
+        setLastName("");
+        setEmail("");
+        setEmailLabel("");
+        setPhoneNumber("");
+    }
 
     return (
         <main className="max-w-6xl mx-auto p-6">
@@ -106,7 +115,7 @@ const Dashboard = () => {
             </div>
 
             {/* Contact List Table */}
-            <ContactList />
+            <ContactList contacts={contacts} setContacts={setContacts} />
         </main>
     );
 };
