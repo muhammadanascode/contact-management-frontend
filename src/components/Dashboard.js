@@ -4,7 +4,7 @@ import Button from "./Button";
 import Modal from "./Modal";
 import InputField from "./InputField";
 import { useEffect, useState } from "react";
-import { createContact, getAllContacts } from "../services/ContactService";
+import { createContact, getAllContacts, searchContact } from "../services/ContactService";
 import { useAuth } from "../context/AuthContext";
 
 const Dashboard = () => {
@@ -13,6 +13,8 @@ const Dashboard = () => {
 
     //State to control modal visibility and form inputs
     const [contacts, setContacts] = useState([]);
+    const [allContacts, setAllContacts] = useState([]);
+    const [loading, setLoading] = useState(true);
     const [isOpen, setIsOpen] = useState(false);
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
@@ -25,9 +27,15 @@ const Dashboard = () => {
     //fetch contacts
     useEffect(() => {
         const fetchContacts = async () => {
+            setLoading(true);
             const res = await getAllContacts(token);
-            if(!res) return;
+            if (!res) {
+                setLoading(false);
+                return;
+            }
             setContacts(res);
+            setAllContacts(res);
+            setLoading(false);
         }
         fetchContacts();
     }, [])
@@ -58,76 +66,94 @@ const Dashboard = () => {
         setEmailLabel("");
         setPhoneNumber("");
         setPhoneNumberLabel("");
+
     }
+
+    const handleSearch = async (keyword) => {
+        if (!keyword.trim()) {
+            setContacts(allContacts); // restore master list
+            return;
+        }
+
+        const res = await searchContact(token, keyword);
+        if (res) setContacts(res);
+    };
+
 
     return (
         <main className="max-w-6xl mx-auto p-6">
-            {/* Search + Action Row */}
-            <div className="flex flex-col sm:flex-row gap-4 mb-3 items-start sm:items-center">
-                <div className="flex-1 w-full">
-                    <SearchBar />
-                </div>
+            {loading ? (
+                <div className="text-center py-8">Loading contacts...</div>
+            ) : (
+                <>
+                    {/* Search + Action Row */}
+                    <div className="flex flex-col sm:flex-row gap-4 mb-3 items-start sm:items-center">
+                        <div className="flex-1 w-full">
+                            <SearchBar onSearch={handleSearch} />
+                        </div>
 
-                <Button
-                    text="+ Add Contact"
-                    className=" px-6 py-2 shrink-0 rounded-full"
-                    onClick={() => setIsOpen(true)}
-                />
-            </div>
+                        <Button
+                            text="+ Add Contact"
+                            className=" px-6 py-2 shrink-0 rounded-full"
+                            onClick={() => setIsOpen(true)}
+                        />
+                    </div>
 
-            {/* Modal for creating new contact */}
-            <Modal
-                isOpen={isOpen}
-                onClose={() => setIsOpen(false)}
-                title={"Create contact"}
-                onSubmit={handleSubmit}
-            >
-                <InputField
-                    type="text"
-                    value={firstName}
-                    setValue={setFirstName}
-                    placeholder="Firstname"
-                />
+                    {/* Modal for creating new contact */}
+                    <Modal
+                        isOpen={isOpen}
+                        onClose={() => setIsOpen(false)}
+                        title={"Create contact"}
+                        onSubmit={handleSubmit}
+                    >
+                        <InputField
+                            type="text"
+                            value={firstName}
+                            setValue={setFirstName}
+                            placeholder="Firstname"
+                        />
 
-                <InputField
-                    type="text"
-                    value={lastName}
-                    setValue={setLastName}
-                    placeholder="Lastname"
-                />
-                <InputField
-                    type="text"
-                    value={email}
-                    setValue={setEmail}
-                    placeholder="Email"
-                />
-                <InputField
-                    type="text"
-                    value={emailLabel}
-                    setValue={setEmailLabel}
-                    placeholder="Email Label"
-                />
-                <InputField
-                    type="text"
-                    value={phoneNumber}
-                    setValue={setPhoneNumber}
-                    placeholder="Phone Number"
-                />
-                <InputField
-                    type="text"
-                    value={phoneNumberLabel}
-                    setValue={setPhoneNumberLabel}
-                    placeholder="Phone No. label"
-                />
-            </Modal>
+                        <InputField
+                            type="text"
+                            value={lastName}
+                            setValue={setLastName}
+                            placeholder="Lastname"
+                        />
+                        <InputField
+                            type="text"
+                            value={email}
+                            setValue={setEmail}
+                            placeholder="Email"
+                        />
+                        <InputField
+                            type="text"
+                            value={emailLabel}
+                            setValue={setEmailLabel}
+                            placeholder="Email Label"
+                        />
+                        <InputField
+                            type="text"
+                            value={phoneNumber}
+                            setValue={setPhoneNumber}
+                            placeholder="Phone Number"
+                        />
+                        <InputField
+                            type="text"
+                            value={phoneNumberLabel}
+                            setValue={setPhoneNumberLabel}
+                            placeholder="Phone No. label"
+                        />
+                    </Modal>
 
-            {/* Contact List Header */}
-            <div className="mt-8">
-                <h4 className="text-lg font-semibold">All Contacts</h4>
-            </div>
+                    {/* Contact List Header */}
+                    <div className="mt-8">
+                        <h4 className="text-lg font-semibold">All Contacts</h4>
+                    </div>
 
-            {/* Contact List Table */}
-            <ContactList contacts={contacts} setContacts={setContacts} />
+                    {/* Contact List Table */}
+                    <ContactList contacts={contacts} setContacts={setContacts} />
+                </>
+            )}
         </main>
     );
 };
