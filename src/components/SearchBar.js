@@ -1,13 +1,22 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import InputField from "./InputField";
 
-const SearchBar = () => {
-    const[value , setValue] = useState("");
+const SearchBar = ({onSearch}) => {
+
+    const [value, setValue] = useState("");
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            onSearch(value);
+        }, 2000);
+
+        return () => clearTimeout(timer);
+    }, [value]);
 
     return (
         <InputField
             type="text"
-            placeholder="Search contacts by name or phone..."
+            placeholder="Search contacts by name"
             value={value}
             setValue={setValue}
         />
