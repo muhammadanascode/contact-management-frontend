@@ -26,6 +26,7 @@ const Dashboard = () => {
     useEffect(() => {
         const fetchContacts = async () => {
             const res = await getAllContacts(token);
+            if(!res) return;
             setContacts(res);
         }
         fetchContacts();
