@@ -14,6 +14,20 @@ export const validateEmail = (email) => {
   return emailRegex.test(email);
 };
 
+export const validateLabel = (label) => {
+  if (!label) return false;
+
+  const len = label.trim().length;
+  return len >= 3 && len <= 20;
+};
+
+export const validatePhoneNumber = (phoneNumber) => {
+  if (!phoneNumber) return false;
+
+  const phoneRegex = /^\+[1-9][0-9]{1,14}$/;
+  return phoneRegex.test(phoneNumber);
+};
+
 // validation: check token expiry
 export const isTokenValid = (token) => {
   try {
