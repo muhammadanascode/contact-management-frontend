@@ -1,7 +1,7 @@
 import { jwtDecode } from "jwt-decode";
 
 export const validateName = (name) => {
-  return name?.length >= 3 && name?.length <= 50;
+  return name?.length >= 3 && name?.length <= 100;
 };
 
 export const validatePassword = (password) => {
