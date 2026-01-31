@@ -19,11 +19,29 @@ const ContactItem = ({ contact, onEdit, onDelete }) => {
                         className="w-8 h-8 object-contain"
                     />
                     {/* Contact name and phone number display */}
-                    <div className='flex flex-col px-2 py-2'>
-                        {/* Contact name - displayed in bold */}
-                        <div className='font-bold'>{contact.name}</div>
-                        {/* Contact phone number - displayed in gray */}
-                        <div className='text-gray-600'>{contact.phone}</div>
+                    <div className="flex flex-col px-3 py-2 space-y-1">
+
+                        {/* Name */}
+                        <div className="font-semibold text-lg">
+                            {contact.firstName} {contact.lastName}
+                        </div>
+
+                        {/* Email row */}
+                        <div className="flex items-center gap-2 text-gray-600 text-sm">
+                            <span>{contact.email}</span>
+                            <span className="bg-gray-200 px-2 py-0.5 rounded text-xs">
+                                {contact.emailLabel}
+                            </span>
+                        </div>
+
+                        {/* Phone row */}
+                        <div className="flex items-center gap-2 text-gray-600 text-sm">
+                            <span>{contact.phoneNumber}</span>
+                            <span className="bg-gray-200 px-2 py-0.5 rounded text-xs">
+                                {contact.phoneNumberLabel}
+                            </span>
+                        </div>
+
                     </div>
                 </div>
                 {/* Right section: action buttons (edit and delete) */}
