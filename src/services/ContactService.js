@@ -97,7 +97,7 @@ export const updateContact = async (
     phoneNumberLabel,
     token
 ) => {
-    
+
     if (!validateName(firstName)) {
         toast.error("First name must be 3–100 characters");
         return null;
@@ -175,5 +175,25 @@ export const deleteContact = async (id, token) => {
     } catch (err) {
         toast.error(err?.response?.data?.message || "Failed to delete contact");
         return false;
+    }
+};
+
+//Service: search contacts
+export const searchContact = async (token, keyword) => {
+    if (!token) return null;
+
+    try {
+        const res = await axios.get(
+            `http://localhost:8080/contacts/getAll?name=${encodeURIComponent(keyword)}`,
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }
+        );
+        return res.data;
+    } catch (error) {
+        toast.error(error?.response?.data?.message || "Failed to search contact");
+        return null;
     }
 };
