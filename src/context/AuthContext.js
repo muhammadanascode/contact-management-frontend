@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState, useMemo } from "react";
+import { createContext, useContext, useEffect, useState, useMemo, useCallback } from "react";
 import { isTokenValid } from "../utils/validation.js";
 
 const AuthContext = createContext(null);
@@ -18,15 +18,15 @@ export const AuthProvider = ({ children }) => {
         setLoading(false);
     }, []);
 
-    const login = (newToken) => {
+    const login = useCallback((newToken) => {
         localStorage.setItem("token", newToken);
         setToken(newToken);
-    };
+    }, []);
 
-    const logout = () => {
+    const logout = useCallback(() => {
         localStorage.removeItem("token");
         setToken(null);
-    };
+    }, []);
 
     const value = useMemo(() => ({
         token,
@@ -34,7 +34,7 @@ export const AuthProvider = ({ children }) => {
         login,
         logout,
         loading,
-    }));
+    }), [token, login, logout, loading]);
 
     return (
         <AuthContext.Provider value={value}>
