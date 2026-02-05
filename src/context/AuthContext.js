@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState, useMemo } from "react";
 import { isTokenValid } from "../utils/validation.js";
 
 const AuthContext = createContext(null);
@@ -28,13 +28,13 @@ export const AuthProvider = ({ children }) => {
         setToken(null);
     };
 
-    const value = {
+    const value = useMemo(() => ({
         token,
         isAuthenticated: !!token,
         login,
         logout,
         loading,
-    };
+    }));
 
     return (
         <AuthContext.Provider value={value}>
