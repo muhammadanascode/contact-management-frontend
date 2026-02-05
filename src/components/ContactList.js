@@ -65,7 +65,7 @@ const ContactList = ({ contacts, setContacts }) => {
         e.preventDefault();
 
         //update contact service
-        const updatedContact = await updateContact(
+        const updatedContact = await updateContact({
             editingId,
             firstName,
             lastName,
@@ -73,7 +73,7 @@ const ContactList = ({ contacts, setContacts }) => {
             emailLabel,
             phoneNumber,
             phoneNumberLabel,
-            token
+            token}
         )
         if (!updatedContact) {
             return;

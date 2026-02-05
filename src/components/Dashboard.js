@@ -43,14 +43,14 @@ const Dashboard = () => {
     // Handle form submission
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const newContact = await createContact(
+        const newContact = await createContact({
             firstName,
             lastName,
             email,
             emailLabel,
             phoneNumber,
             phoneNumberLabel,
-            token
+            token}
         )
         if (!newContact) return;
 
