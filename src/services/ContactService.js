@@ -17,14 +17,14 @@ export const getAllContacts = async (token) => {
     }
 }
 //Service: create new contact
-export const createContact = async (
+export const createContact = async ({
     firstName,
     lastName,
     email,
     emailLabel,
     phoneNumber,
     phoneNumberLabel,
-    token
+    token}
 ) => {
     if (!validateName(firstName)) {
         toast.error("First name must be 3–100 characters");
@@ -87,7 +87,7 @@ export const createContact = async (
 };
 
 // Service: update an existing contact
-export const updateContact = async (
+export const updateContact = async ({
     id,
     firstName,
     lastName,
@@ -95,7 +95,7 @@ export const updateContact = async (
     emailLabel,
     phoneNumber,
     phoneNumberLabel,
-    token
+    token}
 ) => {
 
     if (!validateName(firstName)) {
