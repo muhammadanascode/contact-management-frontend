@@ -43,6 +43,7 @@
     ]
   },
   "devDependencies": {
+    "sonarqube-scanner": "^4.3.4",
     "tailwindcss": "^3.4.19"
   }
 }
