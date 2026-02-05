@@ -24,7 +24,7 @@ export const validateLabel = (label) => {
 export const validatePhoneNumber = (phoneNumber) => {
   if (!phoneNumber) return false;
 
-  const phoneRegex = /^\+[1-9][0-9]{1,14}$/;
+ const phoneRegex = /^\+[1-9]\d{1,14}$/;
   return phoneRegex.test(phoneNumber);
 };
 
