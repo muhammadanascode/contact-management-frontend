@@ -63,10 +63,10 @@ const ContactList = ({ contacts, setContacts }) => {
     const handleSubmit = async (e) => {
         //prevents reload
         e.preventDefault();
-
+        
         //update contact service
         const updatedContact = await updateContact({
-            editingId,
+            id:editingId,
             firstName,
             lastName,
             email,
