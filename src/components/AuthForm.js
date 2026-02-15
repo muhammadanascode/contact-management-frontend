@@ -51,7 +51,7 @@ function AuthForm({ type, handleSignup, handleSignIn }) {
             // Save token in local storage
             login(res?.data?.token)
 
-            // Redirect to home page after signup
+            // Redirect to home page after signin
             navigate("/");
         }
     };
